@@ -1,0 +1,1116 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Feliz Primer Mes - Pixel Art</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      image-rendering: pixelated;
+      image-rendering: crisp-edges;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    .frame-border-top-bottom {
+      background-color: #ffffff;
+      background-image: 
+        linear-gradient(45deg, #1d4ed8 25%, transparent 25%), 
+        linear-gradient(-45deg, #1d4ed8 25%, transparent 25%), 
+        linear-gradient(45deg, transparent 75%, #1d4ed8 75%), 
+        linear-gradient(-45deg, transparent 75%, #1d4ed8 75%);
+      background-size: 10px 10px;
+      background-position: 0 0, 0 5px, 5px -5px, -5px 0px;
+    }
+
+    .frame-border-left-right {
+      background-color: #ffffff;
+      background-image: 
+        linear-gradient(45deg, #ea580c 25%, transparent 25%), 
+        linear-gradient(-45deg, #ea580c 25%, transparent 25%), 
+        linear-gradient(45deg, transparent 75%, #ea580c 75%), 
+        linear-gradient(-45deg, transparent 75%, #ea580c 75%);
+      background-size: 10px 10px;
+      background-position: 0 0, 0 5px, 5px -5px, -5px 0px;
+    }
+
+    .pixel-font {
+      font-family: 'Press Start 2P', monospace;
+    }
+
+    .vt323-font {
+      font-family: 'VT323', monospace;
+    }
+
+    @keyframes pulse-heartbeat {
+      0% { transform: scale(1); }
+      20% { transform: scale(1.25); }
+      40% { transform: scale(0.95); }
+      60% { transform: scale(1.15); }
+      80% { transform: scale(1); }
+      100% { transform: scale(1); }
+    }
+
+    .animate-pulsing {
+      animation: pulse-heartbeat 1.6s infinite ease-in-out;
+      transform-origin: center center;
+    }
+
+    @keyframes cloudCrossScreenSlow {
+      0% { transform: translateX(-160%); opacity: 0; }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% { transform: translateX(180%); opacity: 0; }
+    }
+
+    .animate-cloud-cross-slow {
+      animation: cloudCrossScreenSlow 6s cubic-bezier(0.35, 0, 0.25, 1) forwards;
+    }
+
+    @keyframes busStopBeside {
+      0% { transform: translateX(-150%); opacity: 0; }
+      100% { transform: translateX(0); opacity: 1; }
+    }
+
+    .animate-bus-stop {
+      animation: busStopBeside 1.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+    }
+
+    @keyframes rideAwayRight {
+      0% { transform: translateX(0); opacity: 1; }
+      100% { transform: translateX(250%); opacity: 0; }
+    }
+
+    .animate-ride-away {
+      animation: rideAwayRight 2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    }
+
+    @keyframes rainDrop {
+      0% { transform: translateY(0px); opacity: 0.8; }
+      100% { transform: translateY(35px); opacity: 0.1; }
+    }
+
+    .rain-line {
+      animation: rainDrop 0.4s linear infinite;
+    }
+
+    @keyframes bigFloat {
+      0% { transform: translate(0, 0) rotate(0deg) scale(1); opacity: 0; }
+      20% { opacity: 1; }
+      100% { transform: translate(var(--tx), var(--ty)) rotate(var(--rot)) scale(1.5); opacity: 0; }
+    }
+
+    .floating-big-particle {
+      position: absolute;
+      animation: bigFloat 2s cubic-bezier(0.1, 0.9, 0.2, 1) infinite;
+    }
+
+    @keyframes bounceAround {
+      0% { transform: translate(0, 0) scale(1); }
+      25% { transform: translate(120px, -80px) rotate(15deg); }
+      50% { transform: translate(-100px, 90px) rotate(-15deg); }
+      75% { transform: translate(80px, 70px) rotate(10deg); }
+      100% { transform: translate(0, 0) scale(1); }
+    }
+
+    .animate-bouncing-cat {
+      animation: bounceAround 1.8s ease-in-out infinite;
+    }
+
+    @keyframes jumpEffect {
+      0% { transform: translateY(0) scale(1); }
+      50% { transform: translateY(-30px) scale(1.2); }
+      100% { transform: translateY(0) scale(1); }
+    }
+
+    .jump-anim {
+      animation: jumpEffect 0.35s ease-in-out;
+    }
+
+    @keyframes explosionPop {
+      0% { transform: scale(0.2); opacity: 0; }
+      50% { transform: scale(1.4); opacity: 1; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    .animate-explosion {
+      animation: explosionPop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    }
+
+    @keyframes screenShake {
+      0% { transform: translate(0, 0) rotate(0deg); }
+      10% { transform: translate(-12px, -8px) rotate(-2deg); }
+      20% { transform: translate(10px, 12px) rotate(2deg); }
+      30% { transform: translate(-10px, 8px) rotate(-1deg); }
+      40% { transform: translate(12px, -10px) rotate(1deg); }
+      50% { transform: translate(-8px, 6px) rotate(-1deg); }
+      60% { transform: translate(8px, -6px) rotate(1deg); }
+      70% { transform: translate(-4px, 4px) rotate(0deg); }
+      80% { transform: translate(4px, -2px) rotate(0deg); }
+      100% { transform: translate(0, 0) rotate(0deg); }
+    }
+
+    .animate-screen-shake {
+      animation: screenShake 0.8s ease-in-out;
+    }
+
+    /* Giro de las 3 imágenes mucho más despacio para leer bien */
+    @keyframes shrinkRotateCenterSuperSlow {
+      0% { transform: scale(1) rotate(0deg); opacity: 1; }
+      70% { opacity: 0.9; }
+      100% { transform: scale(0) rotate(360deg); opacity: 0; }
+    }
+
+    .shrink-center-super-slow {
+      animation: shrinkRotateCenterSuperSlow 4.5s ease-in-out forwards;
+    }
+
+    @keyframes textPulseStrong {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.25); text-shadow: 0 0 20px rgba(234, 88, 12, 0.6); }
+      100% { transform: scale(1); }
+    }
+
+    .text-pulsing-strong {
+      animation: textPulseStrong 0.6s infinite ease-in-out;
+    }
+
+    @keyframes spinInfinite {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .animate-spin-slow {
+      animation: spinInfinite 6s linear infinite;
+    }
+
+    @keyframes franticMove {
+      0% { transform: translate(0, 0) rotate(0deg); }
+      25% { transform: translate(var(--fx1), var(--fy1)) rotate(90deg); }
+      50% { transform: translate(var(--fx2), var(--fy2)) rotate(180deg); }
+      75% { transform: translate(var(--fx3), var(--fy3)) rotate(270deg); }
+      100% { transform: translate(0, 0) rotate(360deg); }
+    }
+
+    .frantic {
+      animation: franticMove 0.4s ease-in-out infinite;
+    }
+
+    @keyframes flySlowSpread1 {
+      0% { transform: translate(-300px, -150px) scale(0.2); opacity: 0; }
+      100% { transform: translate(-80px, -40px) scale(1); opacity: 1; }
+    }
+    @keyframes flySlowSpread2 {
+      0% { transform: translate(300px, -150px) scale(0.2); opacity: 0; }
+      100% { transform: translate(80px, -40px) scale(1); opacity: 1; }
+    }
+    @keyframes flySlowSpread3 {
+      0% { transform: translate(-300px, 150px) scale(0.2); opacity: 0; }
+      100% { transform: translate(-80px, 50px) scale(1); opacity: 1; }
+    }
+    @keyframes flySlowSpread4 {
+      0% { transform: translate(300px, 150px) scale(0.2); opacity: 0; }
+      100% { transform: translate(80px, 50px) scale(1); opacity: 1; }
+    }
+    @keyframes flySlowSpread5 {
+      0% { transform: translate(0px, -250px) scale(0.2); opacity: 0; }
+      100% { transform: translate(0px, -60px) scale(1); opacity: 1; }
+    }
+    @keyframes flySlowSpread6 {
+      0% { transform: translate(0px, 250px) scale(0.2); opacity: 0; }
+      100% { transform: translate(0px, 70px) scale(1); opacity: 1; }
+    }
+    @keyframes flySlowSpread7 {
+      0% { transform: translate(-250px, 0px) scale(0.2); opacity: 0; }
+      100% { transform: translate(0px, 0px) scale(1); opacity: 1; }
+    }
+
+    .fly-spread-1 { animation: flySlowSpread1 1.5s cubic-bezier(0.25, 1, 0.5, 1) forwards; }
+    .fly-spread-2 { animation: flySlowSpread2 1.5s cubic-bezier(0.25, 1, 0.5, 1) forwards; }
+    .fly-spread-3 { animation: flySlowSpread3 1.5s cubic-bezier(0.25, 1, 0.5, 1) forwards; }
+    .fly-spread-4 { animation: flySlowSpread4 1.5s cubic-bezier(0.25, 1, 0.5, 1) forwards; }
+    .fly-spread-5 { animation: flySlowSpread5 1.5s cubic-bezier(0.25, 1, 0.5, 1) forwards; }
+    .fly-spread-6 { animation: flySlowSpread6 1.5s cubic-bezier(0.25, 1, 0.5, 1) forwards; }
+    .fly-spread-7 { animation: flySlowSpread7 1.5s cubic-bezier(0.25, 1, 0.5, 1) forwards; }
+
+    .fade-in {
+      animation: fadeIn 0.4s ease-in forwards;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.96); }
+      to { opacity: 1; transform: scale(1); }
+    }
+  </style>
+</head>
+<body class="bg-slate-900 min-h-screen flex items-center justify-center p-2 md:p-6 overflow-hidden cursor-pointer select-none" id="app-body">
+
+  <div id="main-card" class="relative w-full max-w-2xl h-[80vh] max-h-[500px] bg-white rounded-2xl p-4 md:p-6 flex flex-col justify-between shadow-2xl border-2 border-white overflow-hidden">
+
+    <div class="absolute top-0 left-0 right-0 h-3 md:h-4 frame-border-top-bottom z-20"></div>
+    <div class="absolute bottom-0 left-0 right-0 h-3 md:h-4 frame-border-top-bottom z-20"></div>
+    <div class="absolute top-0 bottom-0 left-0 w-3 md:w-4 frame-border-left-right z-20"></div>
+    <div class="absolute top-0 bottom-0 right-0 w-3 md:w-4 frame-border-left-right z-20"></div>
+
+    <div class="relative w-full h-full bg-white rounded-xl flex flex-col items-center justify-center p-2 z-0 overflow-hidden">
+
+      <!-- ================= PASO 1: INICIO ================= -->
+      <div id="step-1" class="flex flex-col items-center justify-center space-y-6 w-full transition-all duration-300">
+        <div class="flex items-center space-x-1.5">
+          <svg class="w-4 h-4 text-pink-400 drop-shadow-sm" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M2 8a5 5 0 0 1 8-4 5 5 0 0 1 8 4c0 6-8 12-8 12S2 14 2 8z"/>
+          </svg>
+          <div class="w-24 md:w-28 h-3.5 border-2 border-slate-700 rounded-full p-0.5 bg-white flex items-center">
+            <div class="h-full w-2/3 bg-pink-400 rounded-full border-r-2 border-slate-700"></div>
+          </div>
+        </div>
+
+        <div class="pixel-font text-blue-600 text-base sm:text-xl md:text-2xl font-black text-center tracking-wider leading-snug px-2 drop-shadow-sm">
+          FELIZ PRIMER MES
+        </div>
+
+        <div class="my-2">
+          <div class="animate-pulsing inline-block cursor-pointer">
+            <svg class="w-7 h-7 md:w-9 md:h-9 text-blue-600 drop-shadow-sm" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M9 2v10h2V2H9zm4 3v7h2V5h-2zm4 3v4h2V8h-2zM5 10v7h2v-7H5zm4 10h8v-2H9v2zm8-2h2v-4h-2v4zm2-4h2V9h-2v5zM7 20V12H5v8h2zm10 2v-2h-8v2h8z" />
+            </svg>
+          </div>
+        </div>
+
+        <div class="pixel-font text-[8px] sm:text-[9px] text-slate-400 animate-pulse text-center tracking-widest">
+          (toca la pantalla para continuar)
+        </div>
+      </div>
+
+
+      <!-- ================= PASO 2: FECHA Y CLIMA ================= -->
+      <div id="step-2" class="hidden flex-col items-center justify-center space-y-4 w-full relative fade-in">
+        <div class="flex flex-wrap items-center justify-center gap-2 sm:gap-3 z-0">
+          <div class="relative w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center text-pink-400">
+            <svg class="absolute inset-0 w-full h-full fill-current drop-shadow-sm" viewBox="0 0 24 24">
+              <path d="M12 2l2.4 7.2h7.6l-6 4.8 2.4 7.2-6-4.8-6 4.8 2.4-7.2-6-4.8h7.6z"/>
+            </svg>
+            <span class="pixel-font text-white text-xs font-bold z-10 pt-0.5">1</span>
+          </div>
+
+          <div class="relative w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center text-pink-400">
+            <svg class="absolute inset-0 w-full h-full fill-current drop-shadow-sm" viewBox="0 0 24 24">
+              <path d="M12 2l2.4 7.2h7.6l-6 4.8 2.4 7.2-6-4.8-6 4.8 2.4-7.2-6-4.8h7.6z"/>
+            </svg>
+            <span class="pixel-font text-white text-xs font-bold z-10 pt-0.5">9</span>
+          </div>
+
+          <div class="pixel-font text-orange-600 text-sm sm:text-lg font-bold tracking-wider ml-1">
+            DE SEPTIEMBRE
+          </div>
+        </div>
+
+        <div class="flex flex-col items-center justify-center space-y-1 z-0">
+          <div class="relative w-12 h-10 flex items-center justify-center">
+            <div class="absolute -top-1 -left-1 text-yellow-400">
+              <svg class="w-7 h-7 fill-current" viewBox="0 0 24 24">
+                <path d="M12 4V1M12 23v-3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M1 12h3M20 12h3M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12" stroke="currentColor" stroke-width="2"/>
+                <circle cx="12" cy="12" r="4" fill="currentColor"/>
+              </svg>
+            </div>
+            <div class="absolute bottom-0 right-0 text-sky-200">
+              <svg class="w-8 h-6 fill-current drop-shadow-sm" viewBox="0 0 24 24">
+                <path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96z"/>
+              </svg>
+            </div>
+          </div>
+
+          <div class="pixel-font text-pink-400 text-xs sm:text-sm font-bold tracking-widest pt-1">
+            29° . 19°
+          </div>
+        </div>
+
+        <div id="cloud-passing-text" class="absolute inset-0 z-40 hidden flex-col items-center justify-center pointer-events-none">
+          <div class="flex flex-col items-center animate-cloud-cross-slow">
+            <div class="w-52 sm:w-64 text-sky-200 relative">
+              <svg viewBox="0 0 100 60" fill="currentColor" class="w-full h-auto">
+                <path d="M 25 35 H 85 A 10 10 0 0 0 85 20 A 12 12 0 0 0 65 12 A 15 15 0 0 0 35 15 A 12 12 0 0 0 15 28 A 10 10 0 0 0 25 35 Z" fill="#bae6fd" stroke="#7dd3fc" stroke-width="1.2"/>
+              </svg>
+              <div class="absolute top-full left-0 right-0 h-8 flex justify-around px-4 pt-0.5 pointer-events-none">
+                <div class="w-0.5 h-4 bg-sky-400 rounded-full rain-line" style="animation-delay: 0s;"></div>
+                <div class="w-0.5 h-5 bg-sky-300 rounded-full rain-line" style="animation-delay: 0.2s;"></div>
+                <div class="w-0.5 h-4 bg-sky-400 rounded-full rain-line" style="animation-delay: 0.4s;"></div>
+                <div class="w-0.5 h-5 bg-sky-300 rounded-full rain-line" style="animation-delay: 0.1s;"></div>
+              </div>
+            </div>
+            <div class="vt323-font text-sky-600 text-xs sm:text-sm font-bold tracking-wider mt-4 bg-white/95 px-2 py-0.5 rounded border border-sky-200 shadow">
+              [LLUVIA AISLADA]
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- ================= PASO 3: PERSONAJES Y BONDI ================= -->
+      <div id="step-3" class="hidden flex-row items-center justify-center w-full h-56 sm:h-64 relative fade-in">
+        <div id="lovers-heart" class="absolute top-2 animate-pulsing z-10 hidden">
+          <img src="imgmes/corazonrosa.png" class="w-9 h-9 object-contain drop-shadow" alt="Corazón">
+        </div>
+
+        <div id="travel-group" class="flex items-end justify-center space-x-3 transition-transform">
+          <div id="bus-beside" class="w-28 sm:w-36 hidden">
+            <img src="imgmes/bondi.png" class="w-full h-auto object-contain" alt="Bondi">
+          </div>
+
+          <div id="lovers-separated" class="flex flex-row items-end justify-around w-full max-w-md px-6">
+            <img src="imgmes/anirara.png" class="h-44 sm:h-52 object-contain" alt="Ella">
+            <img src="imgmes/juliraro.jpg" class="h-48 sm:h-56 object-contain" alt="Él">
+          </div>
+
+          <div id="lovers-together" class="hidden">
+            <img src="imgmes/delamano.jpe" class="h-48 sm:h-56 object-contain" alt="De la mano">
+          </div>
+        </div>
+      </div>
+
+
+      <!-- ================= PASO 4: CARTEL DE ACLARACIÓN ================= -->
+      <div id="step-4" class="hidden flex-col items-center justify-center w-full h-full p-4 fade-in">
+        <div class="vt323-font text-sm sm:text-lg text-slate-700 text-center bg-slate-100 p-4 rounded-lg border-2 border-slate-300 shadow-md leading-relaxed">
+          ACLARACIÓN: el colectivo NO los atropelló, ellos se subieron con él, todavía no aprendí a hacer personajes subiendo a un bondi
+        </div>
+      </div>
+
+
+      <!-- ================= PASO 5: ÍCONOS Y FRASES ================= -->
+      <div id="step-5" class="hidden flex-col items-center justify-center space-y-3 w-full h-full fade-in">
+        <div class="flex flex-wrap items-center justify-center gap-3 sm:gap-4 min-h-[90px]">
+          <img id="picnic-item-1" src="imgmes/arroz.png" class="w-20 h-20 sm:w-24 sm:h-24 object-contain hidden fade-in" alt="Arroz">
+          <img id="picnic-item-2" src="imgmes/carne.png" class="w-12 h-12 sm:w-16 sm:h-16 object-contain hidden fade-in" alt="Carne">
+          <img id="picnic-item-3" src="imgmes/carneroja.png" class="w-12 h-12 sm:w-16 sm:h-16 object-contain hidden fade-in" alt="Carne Roja">
+          <img id="picnic-item-4" src="imgmes/fajitas.png" class="w-20 h-20 sm:w-24 sm:h-24 object-contain hidden fade-in" alt="Fajitas">
+          <img id="picnic-item-5" src="imgmes/palta.png" class="w-20 h-20 sm:w-24 sm:h-24 object-contain hidden fade-in" alt="Palta">
+          <img id="picnic-item-6" src="imgmes/parlante.png" class="w-20 h-20 sm:w-24 sm:h-24 object-contain hidden fade-in" alt="Parlante">
+        </div>
+
+        <div class="flex flex-col items-center text-center space-y-0.5">
+          <div id="text-line-1" class="vt323-font text-base sm:text-xl text-orange-600 font-bold tracking-wider hidden fade-in">
+            lo necesario para un picnic
+          </div>
+          <div id="text-line-2" class="vt323-font text-xs sm:text-sm text-slate-400 tracking-wide font-medium hidden fade-in">
+            (lo necesario para hacerme feliz)
+          </div>
+          <div id="text-line-3" class="vt323-font text-sm sm:text-base text-blue-600 tracking-wide font-bold hidden fade-in">
+            gracias por cumplirme el sueño de hacer un picnic con fajitas &lt;3
+          </div>
+        </div>
+      </div>
+
+
+      <!-- ================= PASO 6: CORAZONES Y ESTRELLAS GRANDES ================= -->
+      <div id="step-6" class="hidden relative w-full h-full items-center justify-center fade-in overflow-hidden">
+        <div class="absolute inset-0 flex items-center justify-center opacity-30">
+          <img src="imgmes/colcha.png" class="w-48 sm:w-60 object-contain" alt="Fondo">
+        </div>
+        <div id="particle-container" class="absolute inset-0 pointer-events-none"></div>
+      </div>
+
+
+      <!-- ================= PASO 7: COLCHA SOLA ================= -->
+      <div id="step-7" class="hidden flex-col items-center justify-center w-full h-full fade-in">
+        <img src="imgmes/colcha.png" class="w-48 sm:w-60 object-contain" alt="Colcha">
+      </div>
+
+
+      <!-- ================= PASO 8: ÍCONOS FLOTANDO LENTO ================= -->
+      <div id="step-8" class="hidden relative w-full h-full flex items-center justify-center fade-in">
+        <img src="imgmes/colcha.png" class="w-48 sm:w-60 object-contain relative z-0" alt="Colcha">
+
+        <div class="absolute inset-0 flex items-center justify-center pointer-events-none z-10">
+          <img src="imgmes/fajitas.png" class="fly-spread-1 w-12 sm:w-16 absolute object-contain" alt="Fajitas">
+          <img src="imgmes/carne.png" class="fly-spread-2 w-10 sm:w-14 absolute object-contain" alt="Carne">
+          <img src="imgmes/carneroja.png" class="fly-spread-3 w-10 sm:w-14 absolute object-contain" alt="Carne Roja">
+          <img src="imgmes/arroz.png" class="fly-spread-4 w-12 sm:w-16 absolute object-contain" alt="Arroz">
+          <img src="imgmes/palta.png" class="fly-spread-5 w-12 sm:w-16 absolute object-contain cursor-pointer pointer-events-auto" onclick="interactiveJump(this)" alt="Palta">
+          <img src="imgmes/parlante.png" class="fly-spread-6 w-12 sm:w-16 absolute object-contain" alt="Parlante">
+          <img src="imgmes/gato3.png" class="fly-spread-7 w-14 sm:w-18 absolute object-contain cursor-pointer pointer-events-auto" onclick="interactiveJump(this); playMeow();" alt="Gato">
+        </div>
+      </div>
+
+
+      <!-- ================= PASO 9: ACLARACIÓN 2 ================= -->
+      <div id="step-9" class="hidden relative w-full h-full items-center justify-center fade-in overflow-hidden">
+        <img src="imgmes/colcha.png" class="w-48 sm:w-60 object-contain opacity-50" alt="Colcha fondo">
+        <div class="absolute z-30 vt323-font text-sm sm:text-lg text-slate-800 bg-white/95 p-4 rounded-xl border-2 border-orange-500 shadow-xl max-w-md text-center leading-relaxed">
+          ACLARACIÓN 2: obvio que la imagen del mantel está hecha con IA porque mis habilidades de htmlear no son tan fuertes, por ahora......
+        </div>
+      </div>
+
+
+      <!-- ================= PASO 10: GATO, EXPLOSIÓN Y HUMO ================= -->
+      <div id="step-10" class="hidden relative w-full h-full flex items-center justify-center fade-in overflow-hidden">
+        <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+          <img src="imgmes/gato3.png" class="w-20 h-20 object-contain animate-bouncing-cat" alt="Gato">
+        </div>
+        <div class="relative z-30 flex items-center justify-center">
+          <img src="imgmes/explosion.gif" class="w-64 h-64 sm:w-80 sm:h-80 object-contain animate-explosion absolute" alt="Explosión">
+          <img src="imgmes/humo.png" class="w-52 h-52 sm:w-64 sm:h-64 object-contain opacity-90 relative z-40 animate-pulse" alt="Humo">
+        </div>
+      </div>
+
+
+      <!-- ================= PASO 11: MAPA DESTINO MIRADOR ================= -->
+      <div id="step-11" class="hidden flex-col items-center justify-center space-y-3 w-full h-full fade-in">
+        <div class="vt323-font text-base sm:text-xl text-orange-600 font-bold bg-white/90 px-4 py-1.5 rounded-md shadow border border-orange-300">
+          Llegada a destino: Mirador Julinenina
+        </div>
+
+        <div class="relative w-full max-w-md h-56 sm:h-68 rounded-lg overflow-hidden border-2 border-slate-700 shadow-xl bg-emerald-50">
+          <img src="imgmes/mapa.jpe" class="w-full h-full object-cover" alt="Mapa">
+          <div class="absolute top-20 left-1/2 -translate-x-1/2 flex items-center justify-center">
+            <div class="w-5 h-5 rounded-full bg-red-500 animate-ping"></div>
+            <div class="absolute w-3 h-3 rounded-full bg-red-600 border border-white"></div>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- ================= PASO 12: LOGRO DESBLOQUEADO MINIMALISTA ================= -->
+      <div id="step-12" class="hidden flex-col items-center justify-center space-y-2 w-full h-full fade-in">
+        <div class="px-4 py-2 rounded-lg bg-amber-50 border border-amber-400 shadow-md flex items-center space-x-2">
+          <span class="text-xl">🏆</span>
+          <span class="pixel-font text-amber-700 text-[10px] font-bold uppercase tracking-wider">Logro Desbloqueado:</span>
+          <span class="vt323-font text-xl text-slate-800 font-bold">1 mes juntos</span>
+        </div>
+      </div>
+
+
+      <!-- ================= PASO 13: FOTOREAL, PAISAJE, YOESPALDA ================= -->
+      <div id="step-13" class="hidden flex-col items-center justify-center space-y-3 w-full h-full fade-in">
+        <div class="vt323-font text-base sm:text-xl text-orange-600 font-bold tracking-wider">
+          FELIZ PRIMER MES AMOR, TE AMO
+        </div>
+        <div class="flex flex-row items-center justify-center gap-2 sm:gap-4 w-full px-2">
+          <img src="imgmes/fotoreal.png" class="w-1/3 h-36 sm:h-44 object-cover rounded border border-slate-300 shadow" alt="Picnic real">
+          <img src="imgmes/paisaje.png" class="w-1/3 h-36 sm:h-44 object-cover rounded border border-slate-300 shadow" alt="Paisaje">
+          <img src="imgmes/yoespalda.png" class="w-1/3 h-36 sm:h-44 object-cover rounded border border-slate-300 shadow" alt="Espalda">
+        </div>
+      </div>
+
+
+      <!-- ================= PASO 14: GIRO DESPACIO + GATOS + DAB MÁS GRANDE Y dabel.jpe ================= -->
+      <div id="step-14" class="hidden relative w-full h-full flex flex-col items-center justify-center fade-in overflow-hidden">
+        <!-- Imágenes achicándose y girando al centro súper despacio para llegar a leer bien -->
+        <div id="center-shrinking-imgs" class="absolute inset-0 flex items-center justify-center gap-2 pointer-events-none shrink-center-super-slow z-10">
+          <img src="imgmes/fotoreal.png" class="w-24 h-24 object-cover rounded">
+          <img src="imgmes/paisaje.png" class="w-24 h-24 object-cover rounded">
+          <img src="imgmes/yoespalda.png" class="w-24 h-24 object-cover rounded">
+        </div>
+
+        <div class="absolute inset-0 pointer-events-none overflow-hidden z-20">
+          <img src="imgmes/gato3.png" class="floating-big-particle w-16 h-16 object-contain" style="left: 10%; top: 20%; animation-duration: 1s;">
+          <img src="imgmes/gato3.png" class="floating-big-particle w-14 h-14 object-contain" style="left: 80%; top: 15%; animation-duration: 1.2s;">
+          <img src="imgmes/gato3.png" class="floating-big-particle w-20 h-20 object-contain" style="left: 30%; top: 70%; animation-duration: 0.9s;">
+          <img src="imgmes/gato3.png" class="floating-big-particle w-16 h-16 object-contain" style="left: 70%; top: 80%; animation-duration: 1.4s;">
+        </div>
+
+        <!-- dabel.jpe y dab.jpe MUCHO MÁS GRANDES -->
+        <div class="absolute inset-0 flex items-center justify-between px-4 sm:px-12 z-25 pointer-events-none">
+          <img src="imgmes/dabel.jpe" class="w-44 h-56 sm:w-60 sm:h-72 object-contain animate-spin-slow" alt="Dab Ella">
+          <img src="imgmes/dab.jpe" class="w-44 h-56 sm:w-60 sm:h-72 object-contain animate-spin-slow" alt="Dab Él">
+        </div>
+
+        <div class="vt323-font text-2xl sm:text-4xl text-orange-600 font-bold text-center z-30 text-pulsing-strong px-4">
+          FELIZ PRIMER MES AMOR, TE AMO
+        </div>
+      </div>
+
+
+      <!-- ================= PASO 15: 3 GIFS DE EXPLOSIÓN ================= -->
+      <div id="step-15" class="hidden relative w-full h-full flex items-center justify-center fade-in overflow-hidden">
+        <div class="relative z-30 flex items-center justify-center">
+          <img src="imgmes/explosion.gif" class="w-64 h-64 sm:w-80 sm:h-80 object-contain animate-explosion absolute" alt="Explosión 1">
+          <img src="imgmes/explosion.gif" class="w-48 h-48 sm:w-64 sm:h-64 object-contain animate-explosion absolute -top-12 -left-20 opacity-90" alt="Explosión 2">
+          <img src="imgmes/explosion.gif" class="w-48 h-48 sm:w-64 sm:h-64 object-contain animate-explosion absolute -bottom-12 -right-20 opacity-90" alt="Explosión 3">
+        </div>
+        <div class="vt323-font text-2xl sm:text-4xl text-orange-600 font-bold text-center z-40 text-pulsing-strong">
+          FELIZ PRIMER MES AMOR, TE AMO
+        </div>
+      </div>
+
+
+      <!-- ================= PASO 16: MOVIMIENTO FRENÉTICO Y MULTIPLICACIÓN ================= -->
+      <div id="step-16" class="hidden relative w-full h-full flex items-center justify-center fade-in overflow-hidden bg-orange-50">
+        <div class="absolute top-2 left-4 vt323-font text-xl text-orange-600 frantic" style="--fx1: 50px; --fy1: 30px; --fx2: -40px; --fy2: 60px; --fx3: 30px; --fy3: -20px;">FELIZ PRIMER MES AMOR, TE AMO</div>
+        <div class="absolute bottom-4 right-4 vt323-font text-2xl text-pink-600 frantic" style="--fx1: -60px; --fy1: -40px; --fx2: 50px; --fy2: -50px; --fx3: -30px; --fy3: 40px;">FELIZ PRIMER MES AMOR, TE AMO</div>
+        <div class="absolute top-1/2 left-2 vt323-font text-lg text-blue-600 frantic" style="--fx1: 40px; --fy1: -50px; --fx2: -50px; --fy2: 40px; --fx3: 20px; --fy3: -30px;">FELIZ PRIMER MES AMOR, TE AMO</div>
+        <div class="absolute top-1/3 right-10 vt323-font text-xl text-purple-600 frantic" style="--fx1: -40px; --fy1: 50px; --fx2: 60px; --fy2: -30px; --fx3: -20px; --fy3: 50px;">FELIZ PRIMER MES AMOR, TE AMO</div>
+
+        <div class="relative z-20 flex flex-wrap items-center justify-center gap-6 w-full h-full p-4">
+          <img src="imgmes/arroz.png" class="w-16 h-16 object-contain frantic" style="--fx1: 100px; --fy1: -80px; --fx2: -90px; --fy2: 70px; --fx3: 50px; --fy3: -60px;">
+          <img src="imgmes/palta.png" class="w-16 h-16 object-contain frantic" style="--fx1: -120px; --fy1: 90px; --fx2: 80px; --fy2: -70px; --fx3: -60px; --fy3: 50px;">
+          <img src="imgmes/carne.png" class="w-16 h-16 object-contain frantic" style="--fx1: 70px; --fy1: 110px; --fx2: -60px; --fy2: -90px; --fx3: 90px; --fy3: 40px;">
+          <img src="imgmes/carneroja.png" class="w-16 h-16 object-contain frantic" style="--fx1: -90px; --fy1: -100px; --fx2: 110px; --fy2: 60px; --fx3: -40px; --fy3: -80px;">
+          <img src="imgmes/parlante.png" class="w-16 h-16 object-contain frantic" style="--fx1: 80px; --fy1: -60px; --fx2: -110px; --fy2: 90px; --fx3: 70px; --fy3: -50px;">
+        </div>
+      </div>
+
+
+      <!-- ================= PASO 17: TODOS LOS ÍCONOS FRENÉTICOS Y TEXTO PERSONALIZADO ================= -->
+      <div id="step-17" class="hidden relative w-full h-full flex items-center justify-center fade-in overflow-hidden bg-pink-50 p-4">
+        <div class="absolute inset-0 flex flex-wrap items-center justify-center gap-4 p-6 pointer-events-none">
+          <img src="imgmes/arroz.png" class="w-12 h-12 object-contain frantic" style="--fx1: 150px; --fy1: -120px; --fx2: -100px; --fy2: 120px; --fx3: 80px; --fy3: -90px;">
+          <img src="imgmes/palta.png" class="w-12 h-12 object-contain frantic" style="--fx1: -140px; --fy1: 130px; --fx2: 110px; --fy2: -90px; --fx3: -70px; --fy3: 80px;">
+          <img src="imgmes/carne.png" class="w-12 h-12 object-contain frantic" style="--fx1: 100px; --fy1: 140px; --fx2: -90px; --fy2: -120px; --fx3: 130px; --fy3: 60px;">
+          <img src="imgmes/carneroja.png" class="w-12 h-12 object-contain frantic" style="--fx1: -120px; --fy1: -140px; --fx2: 140px; --fy2: 80px; --fx3: -60px; --fy3: -110px;">
+          <img src="imgmes/parlante.png" class="w-12 h-12 object-contain frantic" style="--fx1: 110px; --fy1: -90px; --fx2: -140px; --fy2: 130px; --fx3: 90px; --fy3: -70px;">
+          <img src="imgmes/corazonrosa.png" class="w-12 h-12 object-contain frantic" style="--fx1: -130px; --fy1: 110px; --fx2: 90px; --fy2: -140px; --fx3: -100px; --fy3: 90px;">
+          <img src="imgmes/estrella.png" class="w-12 h-12 object-contain frantic" style="--fx1: 140px; --fy1: 100px; --fx2: -120px; --fy2: -100px; --fx3: 110px; --fy3: 70px;">
+          <img src="imgmes/bondi.png" class="w-16 h-16 object-contain frantic" style="--fx1: -100px; --fy1: -150px; --fx2: 120px; --fy2: 110px; --fx3: -90px; --fy3: -120px;">
+          <img src="imgmes/rosa.png" class="w-12 h-12 object-contain frantic" style="--fx1: 120px; --fy1: 120px; --fx2: -110px; --fy2: -110px; --fx3: 100px; --fy3: 100px;">
+        </div>
+        
+        <div class="vt323-font text-sm sm:text-base text-pink-600 font-bold z-20 text-center bg-white/90 p-3 rounded-lg border border-pink-300 shadow-lg leading-snug max-w-md">
+          te amo tanto que el hecho de que seas gay y estés conmigo para que Haku no se entere, es lo de menos
+        </div>
+      </div>
+
+
+      <!-- ================= PASO 18: EXPLOSIÓN FINAL Y MENSAJE ================= -->
+      <div id="step-18" class="hidden relative w-full h-full flex items-center justify-center fade-in overflow-hidden bg-black">
+        <div id="giant-explosion" class="absolute inset-0 z-50 flex items-center justify-center bg-black">
+          <img src="imgmes/explosion.gif" class="w-full h-full object-cover animate-explosion" alt="Explosión gigante">
+        </div>
+
+        <div id="final-message" class="hidden absolute z-50 flex flex-col items-center justify-center p-6 text-center">
+          <div class="vt323-font text-lg sm:text-2xl text-pink-400 font-bold tracking-wider leading-relaxed bg-slate-900/90 p-6 rounded-xl border-2 border-pink-500 shadow-2xl">
+            bueno eso fue todo, besitos tqm putito mi re mil re amor te amo chau
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    let currentStep = 1;
+    let weatherStatePage2 = 0;
+    let step3SubState = 0; 
+    let picnicSubState = 0;
+    let audioCtx = null;
+
+    function initAudio() {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+    }
+
+    function playBeep(freq = 440, duration = 0.08) {
+      try {
+        if (!audioCtx) return;
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = 'square';
+        osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+        gain.gain.setValueAtTime(0.04, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + duration);
+      } catch(e) {}
+    }
+
+    function playSparkle() {
+      try {
+        if (!audioCtx) return;
+        [587.33, 880, 1174.66, 1479.98].forEach((note, index) => {
+          const osc = audioCtx.createOscillator();
+          const gain = audioCtx.createGain();
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(note, audioCtx.currentTime + index * 0.06);
+          gain.gain.setValueAtTime(0.04, audioCtx.currentTime + index * 0.06);
+          gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + index * 0.06 + 0.12);
+          osc.connect(gain);
+          gain.connect(audioCtx.destination);
+          osc.start(audioCtx.currentTime + index * 0.06);
+          osc.stop(audioCtx.currentTime + index * 0.06 + 0.12);
+        });
+      } catch(e) {}
+    }
+
+    function playBusSound() {
+      try {
+        if (!audioCtx) return;
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(80, audioCtx.currentTime);
+        osc.frequency.linearRampToValueAtTime(140, audioCtx.currentTime + 0.6);
+        gain.gain.setValueAtTime(0.05, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.8);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.8);
+      } catch(e) {}
+    }
+
+    function playWindOrBird() {
+      try {
+        if (!audioCtx) return;
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(1200, audioCtx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(1800, audioCtx.currentTime + 0.2);
+        osc.frequency.exponentialRampToValueAtTime(1000, audioCtx.currentTime + 0.4);
+        gain.gain.setValueAtTime(0.03, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.4);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.4);
+      } catch(e) {}
+    }
+
+    function playLevelUp() {
+      try {
+        if (!audioCtx) return;
+        [523.25, 659.25, 783.99, 1046.50].forEach((freq, i) => {
+          const osc = audioCtx.createOscillator();
+          const gain = audioCtx.createGain();
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(freq, audioCtx.currentTime + i * 0.1);
+          gain.gain.setValueAtTime(0.06, audioCtx.currentTime + i * 0.1);
+          gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + i * 0.1 + 0.15);
+          osc.connect(gain);
+          gain.connect(audioCtx.destination);
+          osc.start(audioCtx.currentTime + i * 0.1);
+          osc.stop(audioCtx.currentTime + i * 0.1 + 0.15);
+        });
+      } catch(e) {}
+    }
+
+    function playRetroExplosion() {
+      try {
+        if (!audioCtx) return;
+        const bufferSize = audioCtx.sampleRate * 0.8;
+        const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+        const output = buffer.getChannelData(0);
+        for (let i = 0; i < bufferSize; i++) {
+          output[i] = Math.random() * 2 - 1;
+        }
+
+        const whiteNoise = audioCtx.createBufferSource();
+        whiteNoise.buffer = buffer;
+
+        const filter = audioCtx.createBiquadFilter();
+        filter.type = 'lowpass';
+        filter.frequency.setValueAtTime(800, audioCtx.currentTime);
+        filter.frequency.linearRampToValueAtTime(100, audioCtx.currentTime + 0.8);
+
+        const gain = audioCtx.createGain();
+        gain.gain.setValueAtTime(0.2, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.8);
+
+        whiteNoise.connect(filter);
+        filter.connect(gain);
+        gain.connect(audioCtx.destination);
+
+        whiteNoise.start();
+        whiteNoise.stop(audioCtx.currentTime + 0.8);
+      } catch(e) {}
+    }
+
+    function playJumpSound() {
+      try {
+        if (!audioCtx) return;
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = 'square';
+        osc.frequency.setValueAtTime(150, audioCtx.currentTime);
+        osc.frequency.linearRampToValueAtTime(450, audioCtx.currentTime + 0.15);
+        gain.gain.setValueAtTime(0.05, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.18);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.18);
+      } catch(e) {}
+    }
+
+    function playMeow() {
+      try {
+        if (!audioCtx) return;
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(600, audioCtx.currentTime);
+        osc.frequency.linearRampToValueAtTime(400, audioCtx.currentTime + 0.3);
+        gain.gain.setValueAtTime(0.04, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.35);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.35);
+      } catch(e) {}
+    }
+
+    function interactiveJump(element) {
+      playJumpSound();
+      element.classList.remove('jump-anim');
+      void element.offsetWidth;
+      element.classList.add('jump-anim');
+    }
+
+    function triggerScreenShake() {
+      const card = document.getElementById('main-card');
+      card.classList.remove('animate-screen-shake');
+      void card.offsetWidth;
+      card.classList.add('animate-screen-shake');
+    }
+
+    function spawnBigParticles() {
+      const container = document.getElementById('particle-container');
+      if (!container) return;
+      container.innerHTML = '';
+      
+      const items = ['imgmes/corazonrosa.png', 'imgmes/estrella.png'];
+      for (let i = 0; i < 30; i++) {
+        const img = document.createElement('img');
+        img.src = items[Math.floor(Math.random() * items.length)];
+        img.className = 'floating-big-particle w-12 h-12 sm:w-16 sm:h-16 object-contain';
+        
+        const tx = (Math.random() - 0.5) * 500 + 'px';
+        const ty = (Math.random() - 0.5) * 400 + 'px';
+        const rot = (Math.random() - 0.5) * 720 + 'deg';
+        
+        img.style.setProperty('--tx', tx);
+        img.style.setProperty('--ty', ty);
+        img.style.setProperty('--rot', rot);
+        img.style.left = '50%';
+        img.style.top = '50%';
+        img.style.animationDelay = (Math.random() * 0.5) + 's';
+        img.style.animationDuration = (1.2 + Math.random() * 0.8) + 's';
+        
+        container.appendChild(img);
+      }
+    }
+
+    function advanceSequence() {
+      initAudio();
+
+      // PASO 1 -> PASO 2
+      if (currentStep === 1) {
+        playBeep(470, 0.08);
+        currentStep = 2;
+        document.getElementById('step-1').classList.add('hidden');
+        document.getElementById('step-2').classList.remove('hidden');
+        document.getElementById('step-2').classList.add('flex');
+        return;
+      }
+
+      // PASO 2: Clima
+      if (currentStep === 2) {
+        playWindOrBird();
+        if (weatherStatePage2 === 0) {
+          weatherStatePage2 = 1;
+          const cloudText = document.getElementById('cloud-passing-text');
+          cloudText.classList.remove('hidden');
+          cloudText.classList.add('flex');
+          return;
+        }
+
+        if (weatherStatePage2 === 1) {
+          currentStep = 3;
+          document.getElementById('step-2').classList.add('hidden');
+          document.getElementById('step-2').classList.remove('flex');
+
+          const step3 = document.getElementById('step-3');
+          step3.classList.remove('hidden');
+          step3.classList.add('flex');
+          return;
+        }
+      }
+
+      // PASO 3: Personajes
+      if (currentStep === 3) {
+        if (step3SubState === 0) {
+          step3SubState = 1;
+          playSparkle();
+          document.getElementById('lovers-separated').classList.add('hidden');
+          document.getElementById('lovers-separated').classList.remove('flex');
+
+          document.getElementById('lovers-together').classList.remove('hidden');
+          document.getElementById('lovers-heart').classList.remove('hidden');
+          return;
+        }
+
+        if (step3SubState === 1) {
+          step3SubState = 2;
+          playBusSound();
+          const bus = document.getElementById('bus-beside');
+          bus.classList.remove('hidden');
+          bus.classList.add('animate-bus-stop');
+          return;
+        }
+
+        if (step3SubState === 2) {
+          step3SubState = 3;
+          playBeep(600, 0.1);
+          document.getElementById('lovers-heart').classList.add('hidden');
+          const travelGroup = document.getElementById('travel-group');
+          travelGroup.classList.add('animate-ride-away');
+
+          setTimeout(() => {
+            currentStep = 4;
+            document.getElementById('step-3').classList.add('hidden');
+            document.getElementById('step-3').classList.remove('flex');
+
+            const step4 = document.getElementById('step-4');
+            step4.classList.remove('hidden');
+            step4.classList.add('flex');
+          }, 2000);
+
+          return;
+        }
+      }
+
+      // PASO 4 -> PASO 5
+      if (currentStep === 4) {
+        playBeep(550, 0.08);
+        currentStep = 5;
+        document.getElementById('step-4').classList.add('hidden');
+        document.getElementById('step-4').classList.remove('flex');
+
+        const step5 = document.getElementById('step-5');
+        step5.classList.remove('hidden');
+        step5.classList.add('flex');
+
+        picnicSubState = 1;
+        playSparkle();
+        document.getElementById('picnic-item-1').classList.remove('hidden');
+        return;
+      }
+
+      // PASO 5: Íconos y frases
+      if (currentStep === 5) {
+        if (picnicSubState >= 1 && picnicSubState < 6) {
+          picnicSubState++;
+          playSparkle();
+          document.getElementById(`picnic-item-${picnicSubState}`).classList.remove('hidden');
+          return;
+        }
+
+        if (picnicSubState === 6) {
+          picnicSubState = 7;
+          playBeep(580, 0.08);
+          document.getElementById('text-line-1').classList.remove('hidden');
+          document.getElementById('text-line-1').classList.add('block');
+          return;
+        }
+
+        if (picnicSubState === 7) {
+          picnicSubState = 8;
+          playBeep(600, 0.08);
+          document.getElementById('text-line-2').classList.remove('hidden');
+          document.getElementById('text-line-2').classList.add('block');
+          return;
+        }
+
+        if (picnicSubState === 8) {
+          picnicSubState = 9;
+          playBeep(620, 0.08);
+          document.getElementById('text-line-3').classList.remove('hidden');
+          document.getElementById('text-line-3').classList.add('block');
+          return;
+        }
+
+        if (picnicSubState === 9) {
+          currentStep = 6;
+          document.getElementById('step-5').classList.add('hidden');
+          document.getElementById('step-5').classList.remove('flex');
+
+          const step6 = document.getElementById('step-6');
+          step6.classList.remove('hidden');
+          step6.classList.add('flex');
+          spawnBigParticles();
+          playSparkle();
+          return;
+        }
+      }
+
+      // PASO 6 -> PASO 7
+      if (currentStep === 6) {
+        playBeep(580, 0.08);
+        currentStep = 7;
+        document.getElementById('step-6').classList.add('hidden');
+        document.getElementById('step-6').classList.remove('flex');
+
+        const step7 = document.getElementById('step-7');
+        step7.classList.remove('hidden');
+        step7.classList.add('flex');
+        return;
+      }
+
+      // PASO 7 -> PASO 8
+      if (currentStep === 7) {
+        playLevelUp();
+        currentStep = 8;
+        document.getElementById('step-7').classList.add('hidden');
+        document.getElementById('step-7').classList.remove('flex');
+
+        const step8 = document.getElementById('step-8');
+        step8.classList.remove('hidden');
+        step8.classList.add('flex');
+        return;
+      }
+
+      // PASO 8 -> PASO 9
+      if (currentStep === 8) {
+        playBeep(620, 0.08);
+        currentStep = 9;
+        document.getElementById('step-8').classList.add('hidden');
+        document.getElementById('step-8').classList.remove('flex');
+
+        const step9 = document.getElementById('step-9');
+        step9.classList.remove('hidden');
+        step9.classList.add('flex');
+        return;
+      }
+
+      // PASO 9 -> PASO 10
+      if (currentStep === 9) {
+        playRetroExplosion();
+        triggerScreenShake();
+        currentStep = 10;
+        document.getElementById('step-9').classList.add('hidden');
+        document.getElementById('step-9').classList.remove('flex');
+
+        const step10 = document.getElementById('step-10');
+        step10.classList.remove('hidden');
+        step10.classList.add('flex');
+        return;
+      }
+
+      // PASO 10 -> PASO 11
+      if (currentStep === 10) {
+        playSparkle();
+        currentStep = 11;
+        document.getElementById('step-10').classList.add('hidden');
+        document.getElementById('step-10').classList.remove('flex');
+
+        const step11 = document.getElementById('step-11');
+        step11.classList.remove('hidden');
+        step11.classList.add('flex');
+        return;
+      }
+
+      // PASO 11 -> PASO 12
+      if (currentStep === 11) {
+        playLevelUp();
+        currentStep = 12;
+        document.getElementById('step-11').classList.add('hidden');
+        document.getElementById('step-11').classList.remove('flex');
+
+        const step12 = document.getElementById('step-12');
+        step12.classList.remove('hidden');
+        step12.classList.add('flex');
+        return;
+      }
+
+      // PASO 12 -> PASO 13
+      if (currentStep === 12) {
+        playSparkle();
+        currentStep = 13;
+        document.getElementById('step-12').classList.add('hidden');
+        document.getElementById('step-12').classList.remove('flex');
+
+        const step13 = document.getElementById('step-13');
+        step13.classList.remove('hidden');
+        step13.classList.add('flex');
+        return;
+      }
+
+      // PASO 13 -> PASO 14 (Giro pausado)
+      if (currentStep === 13) {
+        playSparkle();
+        currentStep = 14;
+        document.getElementById('step-13').classList.add('hidden');
+        document.getElementById('step-13').classList.remove('flex');
+
+        const step14 = document.getElementById('step-14');
+        step14.classList.remove('hidden');
+        step14.classList.add('flex');
+        return;
+      }
+
+      // PASO 14 -> PASO 15
+      if (currentStep === 14) {
+        playRetroExplosion();
+        triggerScreenShake();
+        currentStep = 15;
+        document.getElementById('step-14').classList.add('hidden');
+        document.getElementById('step-14').classList.remove('flex');
+
+        const step15 = document.getElementById('step-15');
+        step15.classList.remove('hidden');
+        step15.classList.add('flex');
+        return;
+      }
+
+      // PASO 15 -> PASO 16
+      if (currentStep === 15) {
+        playBeep(700, 0.1);
+        currentStep = 16;
+        document.getElementById('step-15').classList.add('hidden');
+        document.getElementById('step-15').classList.remove('flex');
+
+        const step16 = document.getElementById('step-16');
+        step16.classList.remove('hidden');
+        step16.classList.add('flex');
+        return;
+      }
+
+      // PASO 16 -> PASO 17
+      if (currentStep === 16) {
+        playBeep(750, 0.1);
+        currentStep = 17;
+        document.getElementById('step-16').classList.add('hidden');
+        document.getElementById('step-16').classList.remove('flex');
+
+        const step17 = document.getElementById('step-17');
+        step17.classList.remove('hidden');
+        step17.classList.add('flex');
+        return;
+      }
+
+      // PASO 17 -> PASO 18
+      if (currentStep === 17) {
+        playRetroExplosion();
+        triggerScreenShake();
+        currentStep = 18;
+        document.getElementById('step-17').classList.add('hidden');
+        document.getElementById('step-17').classList.remove('flex');
+
+        const step18 = document.getElementById('step-18');
+        step18.classList.remove('hidden');
+        step18.classList.add('flex');
+
+        setTimeout(() => {
+          document.getElementById('giant-explosion').classList.add('hidden');
+          document.getElementById('final-message').classList.remove('hidden');
+          document.getElementById('final-message').classList.add('flex');
+        }, 1200);
+
+        return;
+      }
+    }
+
+    document.getElementById('app-body').addEventListener('click', advanceSequence);
+  </script>
+</body>
+</html>
